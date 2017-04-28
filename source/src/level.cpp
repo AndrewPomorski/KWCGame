@@ -3,12 +3,12 @@
 #include "SDL.h"
 
 
-Level::Level();
+Level::Level(){};
  
 Level::Level(std::string mapName, Vector2 spawnPoint, Graphics &graphics) : 
 	_mapName(mapName),
 	_spawnPoint(spawnPoint),
-	_size(Vector2(0,0)),
+	_size(Vector2(0,0))
 {
 		this->loadMap(mapName, graphics);
 }
@@ -21,7 +21,7 @@ void Level::loadMap(std::string mapName, Graphics &graphics){
 	/* Temporary implementation, will be fixed later.
 	 * Only loads the background
 	 */
-	this->_backgroundTexture = SDL_CreateTextureFromSurface(graphics.getRenderer(), graphics.loadImage("../../assets/bkBlue.png"));
+	this->_backgroundTexture = SDL_CreateTextureFromSurface(graphics.getRenderer(), graphics.loadImage("../../assets/backgrounds/bkBlue.png"));
 	this->_size = Vector2(1280, 960);
 }
 
@@ -39,7 +39,7 @@ void Level::draw(Graphics &graphics){
 				destRect.y = y * 64;
 				destRect.w = 64;
 				destRect.h = 64;
-				graphics.blitSurface(tjis->_backgroundTexture, &sourceRect, &destRect);
+				graphics.blitSurface(this->_backgroundTexture, &sourceRect, &destRect);
 			}
 		}
 }
