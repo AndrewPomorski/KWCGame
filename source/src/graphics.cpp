@@ -17,6 +17,7 @@ Graphics::Graphics(){
 
 Graphics::~Graphics(){
 	SDL_DestroyWindow(this->_window);
+	SDL_DestroyRenderer(this->_renderer);
 }
 
 

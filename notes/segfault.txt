@@ -1,0 +1,1 @@
+Program is gettin segfault when calling XMLElement::FindAttrbiute. Probably because of some elements, that are not yet implemented. I'll fix that after implementing collision detection etc.
