@@ -2,7 +2,7 @@
 #define GAME_H
 
 #include "player.h"
-
+#include "graphics.h"
 
 class Graphics;
 

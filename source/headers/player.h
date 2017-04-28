@@ -33,7 +33,7 @@ public:
 private:
 	float _dx, _dy;	
 
-	Direction facing;
+	Direction _facing;
 };
 
 #endif
