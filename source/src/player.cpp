@@ -8,12 +8,15 @@ namespace player_constants {
 Player::Player() {}
 
 Player::Player(Graphics &graphics, float x, float y) :
-	AnimatedSprite(graphics, "../../assets/sprites/MyChar.png", 0, 0, 16, 16, x, y, 100) 
+	AnimatedSprite(graphics, "../../assets/sprites/MyChar.png", 0, 0, 16, 16, x, y, 100),
+	_dx(0),
+	_dy(0),
+	_facing(RIGHT)
 {
 	graphics.loadImage("../../assets/sprites/MyChar.png");
 	
 	this->setupAnimations();
-	this->playAnimation("RunRight");
+	this->playAnimation("IdleLeft");
 }
 
 

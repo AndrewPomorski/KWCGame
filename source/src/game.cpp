@@ -51,14 +51,14 @@ void Game::gameLoop(){
 		if ( input.wasKeyPressed( SDL_SCANCODE_ESCAPE ) ){
 			return;
 		}
-		else if ( input.isKeyHeld(SDL_SCANCODE_LEFT) ){
+		else if ( input.isKeyHeld(SDL_SCANCODE_A) ){
 			this->_player.moveLeft();
 		}
-		else if ( input.isKeyHeld(SDL_SCANCODE_RIGHT) ){
+		else if ( input.isKeyHeld(SDL_SCANCODE_D) ){
 			this->_player.moveRight();
 		}
 		
-		if(!input.isKeyHeld(SDL_SCANCODE_RIGHT) && !input.isKeyHeld(SDL_SCANCODE_RIGHT)){
+		if(!input.isKeyHeld(SDL_SCANCODE_A) && !input.isKeyHeld(SDL_SCANCODE_D)){
 			this->_player.stopMoving();
 		}
 
