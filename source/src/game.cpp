@@ -8,8 +8,10 @@
 
 namespace {
 	const int FPS = 50;
-	const int MAX_FRAME_TIME = 5 * 1000 / FPS;
+	const int MAX_FRAME_TIME = 1000 / FPS;
 }
+
+
 
 Game::Game(){
 	SDL_Init( SDL_INIT_EVERYTHING );
@@ -29,7 +31,7 @@ void Game::gameLoop(){
 	Input input;
 	SDL_Event event;
 	
-	this->_player = Player(graphics, 100, 100); 
+	this->_player = Player(graphics, 100, 100);
 
 	int LAST_UPDATE_TIME = SDL_GetTicks();
 	//Start the game loop
