@@ -9,6 +9,9 @@
 #include <algorithm>
 #include <cmath>
 
+
+#define STUBBED(x) printf("STUBBED: %s",x);
+
 using namespace tinyxml2;
 
 Level::Level(){};
@@ -31,11 +34,9 @@ void Level::loadMap(std::string mapName, Graphics &graphics){
 	*/
 	XMLDocument doc;
 	std::stringstream ss;
-	ss << "assets/maps/" << mapName << ".tmx";
+	ss << "../../assets/maps/" << mapName << ".tmx";
 	doc.LoadFile(ss.str().c_str());
-
 	XMLElement* mapNode = doc.FirstChildElement("map");
-
 	/*
 	* Get map's width and height and store it in _map
 	*/
@@ -44,12 +45,14 @@ void Level::loadMap(std::string mapName, Graphics &graphics){
 	mapNode->QueryIntAttribute("height", &height);
 	this->_size = Vector2(width, height);
 
-	/*
+	/*ss
 	* Get tiles' width and height and store it in _tileSize
 	*/
 	int tileWidth, tileHeight;
 	mapNode->QueryIntAttribute("tilewidth", &tileWidth);
 	mapNode->QueryIntAttribute("tileheight", &tileHeight);
+	printf("TILE WIDTH: %d",&tileWidth);
+	printf("TILE HEIGH: %d",&tileHeight);
 	this->_tileSize = Vector2(tileWidth, tileHeight);
 
 	/*
@@ -62,7 +65,7 @@ void Level::loadMap(std::string mapName, Graphics &graphics){
 			const char* source = pTileset->FirstChildElement("image")->Attribute("source");
 			char* path;
 			std::stringstream ss;
-			ss << "assets/tilesets/" << source;
+			ss << "../assets/tilesets/" << source;
 			pTileset->QueryIntAttribute("firstgid", &firstgid);
 			SDL_Texture* tex = SDL_CreateTextureFromSurface(graphics.getRenderer(), graphics.loadImage(ss.str()));
 			this->_tilesets.push_back(Tileset(tex, firstgid));
@@ -108,6 +111,7 @@ void Level::loadMap(std::string mapName, Graphics &graphics){
 							}
 
 							if (tls.FirstGid == -1){
+								printf("No tileset found for this gid\n");
 								//No tileset was found for this gid.
 								tileCounter++;
 								if(pTile->NextSiblingElement("tile")){
@@ -132,7 +136,7 @@ void Level::loadMap(std::string mapName, Graphics &graphics){
 							int tsxx = gid % (tilesetWidth / tileWidth) - 1;
 							tsxx *= tileWidth;
 							int tsyy = 0;
-							int amt = (gid / ( tileWidth / tileWidth ));
+							int amt = (gid / ( tilesetWidth / tileWidth ));
 							tsyy = tileHeight * amt;
 							Vector2 finalTilesetPosition = Vector2(tsxx, tsyy);
 
