@@ -65,7 +65,7 @@ void Level::loadMap(std::string mapName, Graphics &graphics){
 			const char* source = pTileset->FirstChildElement("image")->Attribute("source");
 			char* path;
 			std::stringstream ss;
-			ss << "../assets/tilesets/" << source;
+			ss << "../../assets/tilesets/" << source;
 			pTileset->QueryIntAttribute("firstgid", &firstgid);
 			SDL_Texture* tex = SDL_CreateTextureFromSurface(graphics.getRenderer(), graphics.loadImage(ss.str()));
 			this->_tilesets.push_back(Tileset(tex, firstgid));
@@ -103,6 +103,8 @@ void Level::loadMap(std::string mapName, Graphics &graphics){
 							int gid = pTile->IntAttribute("gid");
 							Tileset tls;
 							for (int i = 0; i < this->_tilesets.size(); i++ ){
+								printf("Reaching assign loop\n");
+								printf("tilesets.size: %d\n", this->_tilesets.size());
 								if(this->_tilesets[i].FirstGid <= gid){
 									// This is the needed tileset
 									tls = this->_tilesets.at(i);
