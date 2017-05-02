@@ -6,6 +6,7 @@ namespace globals {
 	const int SCREEN_HEIGHT = 480;
 
 	const float SPRITE_SCALE = 2.0f;
+	const float VELOCITY = 5.0f;
 }
 
 enum Direction {
