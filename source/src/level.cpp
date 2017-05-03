@@ -51,8 +51,6 @@ void Level::loadMap(std::string mapName, Graphics &graphics){
 	int tileWidth, tileHeight;
 	mapNode->QueryIntAttribute("tilewidth", &tileWidth);
 	mapNode->QueryIntAttribute("tileheight", &tileHeight);
-	printf("TILE WIDTH: %d",&tileWidth);
-	printf("TILE HEIGH: %d",&tileHeight);
 	this->_tileSize = Vector2(tileWidth, tileHeight);
 
 	/*
@@ -103,8 +101,6 @@ void Level::loadMap(std::string mapName, Graphics &graphics){
 							int gid = pTile->IntAttribute("gid");
 							Tileset tls;
 							for (int i = 0; i < this->_tilesets.size(); i++ ){
-								printf("Reaching assign loop\n");
-								printf("tilesets.size: %d\n", this->_tilesets.size());
 								if(this->_tilesets[i].FirstGid <= gid){
 									// This is the needed tileset
 									tls = this->_tilesets.at(i);

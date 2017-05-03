@@ -14,24 +14,45 @@ public:
 	void update(float elapsedTime);
 
 	/*
-	 *Moves player left by - dx
-	 * */	
+	 *	Moves player left by - dx
+	 */
 	void moveLeft();
 	
 	/*
-	 *Moves player right by dx. 
-	 * */
+	 *	Moves player right by dx.
+	 */
 	void moveRight();
-
+	
+	/*
+	 * Subtract from y axis
+	 */
+	void moveUp();
+	
+	/*
+	 * Add to y axis
+	 */
+	void moveDown();
 	/*
 	 *Stops moving the player and plays "idle" animation 
 	 * */
 	void stopMoving();
 
+	void moveToLocation(float xDest, float yDest);
+	
+	int getCurrentHealth();
+	
+	void setMaxHealth(int amount);
+
 	virtual void animationDone(std::string currentAnimation);
 	virtual void setupAnimations();
+
+	float getPosX();
+	float getPosY();
 private:
 	float _dx, _dy;	
+	
+	int _currentHealth;
+	int _maxHealth;
 
 	Direction _facing;
 };

@@ -7,6 +7,7 @@
 #include "SDL.h"
 #include <map>
 #include <string>
+#include "camera.h"
 
 struct SDL_Window;
 struct SDL_Renderer;
@@ -42,10 +43,16 @@ public:
 	*Returns the renderer to be used in a Sprite class.
 	*/
 	SDL_Renderer* getRenderer() const;
+
+	/*
+	 * Switches between windowed and fullscreen mode
+	 */
+	void toggleFullScreen();
+
 private:
 	SDL_Window* 	_window;
 	SDL_Renderer* 	_renderer;
-
+	Camera		_camera;
 	std::map<std::string, SDL_Surface*> _spriteSheets;
 	
 };

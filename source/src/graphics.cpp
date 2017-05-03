@@ -3,6 +3,8 @@
 
 #include "graphics.h"
 #include "globals.h"
+#include "camera.h"
+
 /*
 * Graphics class implementation.
 * Holds all information dealing with game graphics.
@@ -11,8 +13,6 @@
 Graphics::Graphics(){
 	SDL_CreateWindowAndRenderer(globals::SCREEN_WIDTH, globals::SCREEN_HEIGHT, 0, &this->_window, &this->_renderer);
 	SDL_SetWindowTitle(this->_window, "Hong");
-
-
 }
 
 Graphics::~Graphics(){
@@ -32,8 +32,11 @@ SDL_Surface* Graphics::loadImage( const std::string &filePath ){
 }
 
 void Graphics::blitSurface( SDL_Texture* texture, SDL_Rect* sourceRectangle, SDL_Rect* destinationRectangle ) {
-	SDL_RenderCopy( this->_renderer, texture, sourceRectangle, destinationRectangle );
+	destinationRectangle->x = destinationRectangle->x - this->_camera.getRect().x;
+	destinationRectangle->y = destinationRectangle->y - this->_camera.getRect().y;
+	SDL_RenderCopy( this->_renderer, texture, sourceRectangle, destinationRectangle);
 }
+
 
 void Graphics::flip(){
 	SDL_RenderPresent(this->_renderer);
@@ -47,3 +50,7 @@ void Graphics::clear(){
 SDL_Renderer* Graphics::getRenderer() const {
 	return this->_renderer;
 }
+
+void Graphics::toggleFullScreen(){
+	SDL_SetWindowFullscreen(this->_window, SDL_WINDOW_FULLSCREEN);
+} 

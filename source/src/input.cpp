@@ -9,8 +9,7 @@
 // to reset the keys that are no longer relevant.
 void Input::beginNewFrame(){
 	this->_pressedKeys.clear();
-	this->_releasedKeys.clear();
-	
+	this->_releasedKeys.clear();	
 }
 
 // This gets called when a key has been pressed.
@@ -38,3 +37,5 @@ bool Input::wasKeyReleased( SDL_Scancode key ){
 bool Input::isKeyHeld( SDL_Scancode key ){
 	return this->_heldKeys[key];
 }
+
+

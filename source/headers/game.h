@@ -4,7 +4,7 @@
 #include "player.h"
 #include "graphics.h"
 #include "level.h"
-
+#include "camera.h"
 
 class Graphics;
 
@@ -20,6 +20,7 @@ private:
 
 	Player _player;
 	Level _level;
+	Camera _camera;
 };
 
 #endif

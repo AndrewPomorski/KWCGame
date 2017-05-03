@@ -16,6 +16,8 @@ private:
 	std::map<SDL_Scancode, bool> _heldKeys;
 	std::map<SDL_Scancode, bool> _pressedKeys;
 	std::map<SDL_Scancode, bool> _releasedKeys;
+	int * mouseX;
+	int * mouseY;
 };
 
 #endif

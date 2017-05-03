@@ -1,10 +1,16 @@
-#ifndef CAMERA_H
-#define CAMERA_H
-
-class Camera {
+#include "camera.h"
 
 
+Camera::Camera(){}
 
-};
+Camera::~Camera(){}
 
-#endif
+void Camera::update(float elapsedTime, Player player){
+	this->_viewport.x = player.getPosX();
+	this->_viewport.y = player.getPosY();
+}
+
+
+SDL_Rect Camera::getRect(){
+	return this->_viewport;
+}

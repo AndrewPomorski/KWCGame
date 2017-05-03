@@ -15,9 +15,6 @@ namespace {
 
 Game::Game(){
 	SDL_Init( SDL_INIT_EVERYTHING );
-	/*
-	* TODO: Remove the gameLoop call from constructor. 
-	*/ 
 	this->gameLoop();
 
 }
@@ -27,14 +24,16 @@ Game::~Game(){
 
 void Game::gameLoop(){
 
+	Camera camera;
 	Graphics graphics;
 	Input input;
 	SDL_Event event;
-	
+
 	this->_player = Player(graphics, 100, 100);
-	this->_level = Level("cavemap", Vector2(100, 100), graphics);
+	this->_level = Level("overworld", Vector2(100, 100), graphics);
 
 	int LAST_UPDATE_TIME = SDL_GetTicks();
+
 	//Start the game loop
 	while ( true ){
 		input.beginNewFrame();
@@ -54,19 +53,32 @@ void Game::gameLoop(){
 		if ( input.wasKeyPressed( SDL_SCANCODE_ESCAPE ) ){
 			return;
 		}
+		else if (input.wasKeyPressed(SDL_SCANCODE_R)){
+			this->_player.moveToLocation(100, 100);
+		}
+		else if (input.wasKeyPressed(SDL_SCANCODE_F)){
+			graphics.toggleFullScreen();
+		}
 		else if ( input.isKeyHeld(SDL_SCANCODE_A) ){
 			this->_player.moveLeft();
 		}
 		else if ( input.isKeyHeld(SDL_SCANCODE_D) ){
 			this->_player.moveRight();
 		}
+		else if ( input.isKeyHeld(SDL_SCANCODE_S) ){
+			this->_player.moveDown();
+		}
+		else if ( input.isKeyHeld(SDL_SCANCODE_W) ){
+			this->_player.moveUp();
+		}
 		
-		if(!input.isKeyHeld(SDL_SCANCODE_A) && !input.isKeyHeld(SDL_SCANCODE_D)){
+		if(!input.isKeyHeld(SDL_SCANCODE_A) && !input.isKeyHeld(SDL_SCANCODE_D) && !input.isKeyHeld(SDL_SCANCODE_S) && !input.isKeyHeld(SDL_SCANCODE_W)){
 			this->_player.stopMoving();
 		}
 
 		const int CURRENT_TIME_MS = SDL_GetTicks();
 		int ELAPSED_TIME_MS = CURRENT_TIME_MS  - LAST_UPDATE_TIME;
+
 		this->update(std::min( ELAPSED_TIME_MS, MAX_FRAME_TIME ));
 		LAST_UPDATE_TIME = CURRENT_TIME_MS;
 
@@ -84,9 +96,9 @@ void Game::draw( Graphics &graphics ){
 }
 
 void Game::update( float elapsedTime ){
+	this->_camera.update(elapsedTime, this->_player);
 	this->_player.update(elapsedTime);
-	this->_level.update(elapsedTime);
-	
+	this->_level.update(elapsedTime);	
 }
 
 
